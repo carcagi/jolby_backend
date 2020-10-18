@@ -42,7 +42,7 @@ app.get('/api/v1/jobs', (req, res) => {
   });
 
 // Get a job
-app.get('/api/v1/jobs/:id', (req, res) => {
+app.get('/api/v1/jobs/id', (req, res) => {
   (async () => {
       try {
           const document = db.collection('Jobs').doc(req.params.id);
@@ -59,7 +59,7 @@ app.get('/api/v1/jobs/:id', (req, res) => {
   });
 
 // Delete
-app.delete('/api/v1/delete/:id', (req, res) => {
+app.delete('/api/v1/delete/id', (req, res) => {
   (async () => {
     try {
         const document = db.collection('Jobs').doc(req.params.id);
