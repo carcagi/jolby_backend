@@ -27,8 +27,7 @@ app.get('/api/v1/jobs', (req, res) => {
           await jobPosts.get().then(querySnapshot => {
           let docs = querySnapshot.docs;
           for (let doc of docs) {
-              const selectedItem = {};
-              selectedItem[doc.id] = doc.data();
+              const selectedItem = doc.data();
               response.push(selectedItem);
           }
           return response;
@@ -47,9 +46,7 @@ app.get('/api/v1/jobs/:item_id', (req, res) => {
       try {
           const document = db.collection('Jobs').doc(req.params.item_id);
           let item = await document.get();
-          const response = {};
-          selectedItem[item.id] = item.data();
-
+          const response = item.data();
           return res.status(200).send(response);
       } catch (error) {
           console.log(error);
