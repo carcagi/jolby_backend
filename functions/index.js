@@ -42,10 +42,10 @@ app.get('/api/v1/jobs', (req, res) => {
   });
 
 // Get a job
-app.get('/api/v1/jobs/id', (req, res) => {
+app.get('/api/v1/jobs/:item_id', (req, res) => {
   (async () => {
       try {
-          const document = db.collection('Jobs').doc(req.params.id);
+          const document = db.collection('Jobs').doc(req.params.item_id);
           let item = await document.get();
           const response = {};
           selectedItem[item.id] = item.data();
@@ -59,10 +59,10 @@ app.get('/api/v1/jobs/id', (req, res) => {
   });
 
 // Delete
-app.delete('/api/v1/delete/id', (req, res) => {
+app.delete('/api/v1/delete/:item_id', (req, res) => {
   (async () => {
     try {
-        const document = db.collection('Jobs').doc(req.params.id);
+        const document = db.collection('Jobs').doc(req.params.item_id);
         await document.delete();
         return res.status(200).send('Deleted succesfully!');
     } catch (error) {
