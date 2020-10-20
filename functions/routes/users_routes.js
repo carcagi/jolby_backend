@@ -59,9 +59,9 @@ try {
 router.post('/api/v1/users', (req, res) => {
 (async () => {
 try {
-    await db.collection('Users').doc('/' + req.body.id + '/')
-        .create({item: req.body.item});
-    return res.status(200).send('Job offer created succesfully');
+    await db.collection('Users').doc(req.body.id)
+        .set(req.body);
+    return res.status(200).send('User created succesfully');
 } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -75,10 +75,11 @@ router.put('/api/v1/users/:item_id', (req, res) => {
 (async () => {
 try {
 const document = db.collection('Users').doc(req.params.item_id);
+let item = req.body
 await document.update({
-    item: req.body.item
+    name: req.body.name
 });
-return res.status(200).send();
+return res.status(200).send("Edited succesfully");
 } catch (error) {
 console.log(error);
 return res.status(500).send(error);
