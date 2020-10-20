@@ -73,8 +73,8 @@ app.delete('/api/v1/delete/:item_id', (req, res) => {
 app.post('/api/v1/create', (req, res) => {
   (async () => {
       try {
-        await db.collection('Jobs').doc('/' + req.body.id + '/')
-            .create({item: req.body.item});
+        await db.collection('Jobs').doc(req.body.id)
+            .set(req.body);
         return res.status(200).send('Job offer created succesfully');
       } catch (error) {
         console.log(error);

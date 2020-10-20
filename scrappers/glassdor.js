@@ -2,7 +2,8 @@
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const fs = require('fs');
-const {getTagsFrom} = require("./regex.js");
+const {getTagsFrom} = require("./tags_getter.js");
+const {filterOffer} = require("./jobs_filter.js");
 
 class Job {
   constructor(title, id, company, time, image, applyLink, tags = []) {
@@ -29,18 +30,22 @@ async function createJobsFrom($) {
   return Promise.all(
     $('li.jl').map(async function (elem) {
       const title = $(this).find('.jobInfoItem span').text();
-      const company = $(this).find('.jobHeader span').text();
-      const id = $(this).attr('data-id');
-      const time = $(this).find('.d-flex div.pl-std').text();
-      const image = $(this).find('img').attr('src');
-      const glassLink = $(this).find('.e1rrn5ka2 a').attr('href');
-      const applyLink = 'https://www.glassdoor.com' + glassLink;
-      const description = glassLink ? await getDesc(applyLink) : ''; // si true ejecuta codigo a la izq, false despues de los puntos
-      const tags = getTagsFrom(description);
-      const job = new Job(title, id, company, time, image, applyLink, tags);
-      const dic = {};
-      dic[id] = JSON.stringify(job);
-      return dic;
+      if (filterOffer(title)) {
+        const company = $(this).find('.jobHeader span').text();
+        const id = $(this).attr('data-id');
+        const time = $(this).find('.d-flex div.pl-std').text();
+        const image = $(this).find('img').attr('src');
+        const glassLink = $(this).find('.e1rrn5ka2 a').attr('href');
+        const applyLink = 'https://www.glassdoor.com' + glassLink;
+        const description = glassLink ? await getDesc(applyLink) : ''; // si true ejecuta codigo a la izq, false despues de los puntos
+        const tags = getTagsFrom(description);
+        const job = new Job(title, id, company, time, image, applyLink, tags);
+        const dic = {};
+        dic[id] = JSON.stringify(job);
+        return dic;
+    } else {
+      return null;
+    }
     }).toArray()
   );
 }

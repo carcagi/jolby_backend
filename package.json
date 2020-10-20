@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/dalejohgi/jolby_backend/issues"
   },
-  "homepage": "https://github.com/dalejohgi/jolby_backend#readme"
+  "homepage": "https://github.com/dalejohgi/jolby_backend#readme",
+  "dependencies": {
+    "add": "^2.0.6",
+    "express": "^4.17.1",
+    "node-cron": "^2.0.3",
+    "request": "^2.88.2"
+  }
 }
