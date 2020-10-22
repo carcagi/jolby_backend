@@ -1,12 +1,12 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
-
+const {loadData} = require("./engine/webScanner");
+const {scan} = require("./engine/webScanner");
 const serviceAccount = require("./permissions.json");
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://jolby-dda21.firebaseio.com",
@@ -15,8 +15,17 @@ admin.initializeApp({
 app.use(cors({ origin: true }));
 
 
-app.get("/hello-world", (req, res) => {
-  return res.status(200).json({ message: "Hello World!" });
+app.get("/api/v1/refresh", (req, res) => {
+  (async () => {
+    try {
+      const data = await scan();
+      await loadData(admin.firestore(), data);
+      return res.status(200).send("Jolby has been refresh successfully");
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+    }
+    })();
 });
 
 // Routes

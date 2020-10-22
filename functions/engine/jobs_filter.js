@@ -1,6 +1,7 @@
 #!/usr/bin/node
 const discard_keys = [ 
-  /Senior/ig,
+  /Senior/img,
+  /\nSenior/img,
   /Sr/ig,
   /Marketing/ig,
   /Manager/ig,
@@ -9,12 +10,13 @@ const discard_keys = [
   /Salesforce/ig,
   /Sales/ig,
   /Expert/ig,
+  /Executive/ig,
   /Communications/ig,
   /Business/ig,
   /Analyst/ig,
   /Media/ig,
   /QA/g,
-  /Experiencied/ig,
+  /Experienced/ig,
   /legal/ig,
   /Consultant/ig,
 ]

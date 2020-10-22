@@ -1,12 +1,9 @@
 #!/usr/bin/node
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
-const fs = require('fs');
-//const cron = require('node-cron');
-const {scan} = require("./engine.js");
-const {cleanup} = require("./engine.js");
+const {filterOffer} = require("./jobs_filter");
 
-cleanup();
+console.log(filterOffer('Senior Backend Software Engineer            '));
 
 //cron.schedule('* * * * *', () => {
  // console.log('running a task every minute');

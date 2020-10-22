@@ -1,14 +1,9 @@
 #!/usr/bin/node
-/**
- * Stackoverflow scrapper 
- * 
- */
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const {getTagsFrom} = require("./tags_getter.js");
 const {filterOffer} = require("./jobs_filter.js");
 
-//Job objects constructor
 class Job {
   constructor(title, id, company, time, image, applyLink, tags = []) {
     this.title = title;
@@ -20,45 +15,41 @@ class Job {
     this.tags = tags;
   }
 };
-
-//getDesc get the description from an offer to extract the tags from it
 async function getDesc(url) {
   const res = await fetch(url, {
     headers: { 'User-Agent': 'Chrome/51.0.2704.103' }
   });
   const html2 = await res.text();
   const $$ = cheerio.load(html2);
-  return $$('section.mb32.fs-body2.fc-medium.pr48 div').text();
+  return $$('#JobDescriptionContainer').text();
 };
 
-//Return an array of dictionaries {id: job object}
 async function createJobsFrom($) {
   return Promise.all(
-    $('.-job').map(async function (elem) {
-      const title = $(this).find('h2').text();
+    $('li.jl').map(async function (elem) {
+      const title = $(this).find('.jobInfoItem span').text();
       if (filterOffer(title)) {
-        const company = $(this).find('h3 span').first().text();
-        const id = $(this).attr('data-jobid');
-        const time = $(this).find('.fc-orange-400').text();
+        const company = $(this).find('.jobHeader span').text();
+        const id = $(this).attr('data-id');
+        const time = $(this).find('.d-flex div.pl-std').text();
         const image = $(this).find('img').attr('src');
-        const stackLink = $(this).find('h2 a').attr('href');
-        const applyLink = 'https://www.stackoverflow.com' + stackLink;
-        const description = stackLink ? await getDesc(applyLink) : ''; // si true ejecuta codigo a la izq, false despues de los puntos
+        const glassLink = $(this).find('.e1rrn5ka2 a').attr('href');
+        const applyLink = 'https://www.glassdoor.com' + glassLink;
+        const description = glassLink ? await getDesc(applyLink) : ''; // si true ejecuta codigo a la izq, false despues de los puntos
         const tags = getTagsFrom(description);
         const job = new Job(title, id, company, time, image, applyLink, tags);
         const dic = {};
         dic[id] = JSON.stringify(job);
         return dic;
-      } else {
-        return null;
-      }  
+    } else {
+      return null;
+    }
     }).toArray()
   );
 }
 
-//Main function - Scrapper
-exports.stackoverflow = async function () {
-  const response = await fetch('https://stackoverflow.com/jobs?l=remote&d=20&u=Km&r=true&c=cop&ms=Student&mxs=MidLevel', {
+exports.glassdoor = async function () {
+  const response = await fetch('https://www.glassdoor.com/Job/remote-junior-jobs-SRCH_IL.0,6_IS11047_KO7,13.htm?industryId=1059', {
     headers: { 'User-Agent': 'Chrome/51.0.2704.103' }
   });
   const html = await response.text();

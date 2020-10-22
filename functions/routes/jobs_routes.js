@@ -49,7 +49,7 @@ router.delete('/api/v1/jobs/:item_id', (req, res) => {
     try {
         const document = db.collection('Jobs').doc(req.params.item_id);
         await document.delete();
-        return res.status(200).send('Deleted succesfully!');
+        return res.status(200).send('Deleted successfully!');
     } catch (error) {
         console.log(error);
         return res.status(500).send(error);
