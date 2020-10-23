@@ -3,6 +3,7 @@ const discard_keys = [
   /Senior/img,
   /\nSenior/img,
   /Sr/ig,
+  /Head/ig,
   /Marketing/ig,
   /Manager/ig,
   /Lead/ig,

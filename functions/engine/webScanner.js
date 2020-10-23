@@ -1,7 +1,9 @@
 #!/usr/bin/node
+const { arc } = require("./arcdev.js");
 const {glassdoor} = require("./glassdoor.js");
+const { jrdev } = require("./jrdevjobs.js");
 const { stackoverflow } = require('./stackoverflow.js');
-const scrappers = [glassdoor, stackoverflow];
+const scrappers = [glassdoor, stackoverflow, arc, jrdev];
 
 exports.scan = async function () {
   const jsonList = [];

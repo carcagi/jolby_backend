@@ -40,7 +40,8 @@ async function createJobsFrom($) {
         const company = $(this).find('h3 span').first().text();
         const id = $(this).attr('data-jobid');
         const time = $(this).find('.fc-orange-400').text();
-        const image = $(this).find('img').attr('src');
+        let image = $(this).find('img').attr('src');
+        image = (image === "") ? "https://thirsty-bhaskara-9f8dd9.netlify.app/static/media/logo.2be84f51.png" : image; // si true ejecuta codigo a la izq, false despues de los puntos
         const stackLink = $(this).find('h2 a').attr('href');
         const applyLink = 'https://www.stackoverflow.com' + stackLink;
         const description = stackLink ? await getDesc(applyLink) : ''; // si true ejecuta codigo a la izq, false despues de los puntos
