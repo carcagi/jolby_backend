@@ -1,4 +1,6 @@
 #!/usr/bin/node
+
+
 const techs = [
   {name: "Python", expresion: /Python/ig},
   {name: "Django", expresion: /Django/ig},
@@ -45,6 +47,8 @@ const techs = [
   {name: "Backend", expresion: /Back\send/ig},
   {name: "DevOps", expresion: /Devops/ig},
 ];
+
+// Extract key words pased a description and return a list of associated tags of an offer
 exports.getTagsFrom = function (desc) {
   const tags = []
   for(let i = 0; techs[i]; i++) {

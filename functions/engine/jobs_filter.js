@@ -21,6 +21,8 @@ const discard_keys = [
   /legal/ig,
   /Consultant/ig,
 ]
+
+// Discards non related offers
 exports.filterOffer = function (title) {
     for(let i = 0; discard_keys[i]; i++) {
       if (discard_keys[i].test(title))

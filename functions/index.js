@@ -14,7 +14,7 @@ admin.initializeApp({
 
 app.use(cors({ origin: true }));
 
-
+// Refresh the data in Jolby App using and endpoint
 app.get("/api/v1/refresh", (req, res) => {
   (async () => {
     try {

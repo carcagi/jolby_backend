@@ -1,48 +1,11 @@
 #!/usr/bin/node
-const cheerio = require('cheerio');
 const fetch = require('node-fetch');
-const fs = require('fs');
 const {getTagsFrom} = require("./tags_getter.js");
 const {filterOffer} = require("./jobs_filter.js");
 const {timeCalculator} = require("./timeCalculator.js");
+const { Job } = require("./constructor");
 
-class Job {
-  constructor(title, id, company, time, image, applyLink, tags = []) {
-    this.title = title;
-    this.id = id;
-    this.company = company;
-    this.time = time;
-    this.image = image;
-    this.applyLink = applyLink;
-    this.tags = tags;
-  }
-};
-
-async function createJobsFromJson(json) {
-  const arcJobs = json.hits
-  const jolbyJobs = []
-  for (offer of arcJobs) {
-    const title = offer.title;
-    if (filterOffer(title)) {
-      const company = offer.company_name;
-      const id = offer.objectID;
-      const time = timeCalculator(offer.posted_timestamp);
-      let image = offer.company_logo_url;
-      image = (image === "") ? "https://thirsty-bhaskara-9f8dd9.netlify.app/static/media/logo.2be84f51.png" : image; // si true ejecuta codigo a la izq, false despues de los puntos
-      const applyLink = offer.url;
-      const description = offer.description;
-      const tags = getTagsFrom(description);
-      const job = new Job(title, id, company, time, image, applyLink, tags);
-      const dic = {};
-      dic[id] = JSON.stringify(job);
-      jolbyJobs.push(dic);
-    } else {
-      continue;
-    }
-  }
-  return jolbyJobs;
-}
- 
+// Api consummer of arc.dev
 exports.arc = async function () {
   let response = await fetch('https://ximrnvjlq7-dsn.algolia.net/1/indexes/Pioneer_job_posts_production/query?x-algolia-agent=Algolia%20for%20vanilla%20JavaScript%203.32.0&x-algolia-application-id=XIMRNVJLQ7&x-algolia-api-key=7c36eb43e38ceee5bfa9cbfd641b9d92', {
     method: 'POST',
@@ -67,3 +30,29 @@ exports.arc = async function () {
   return JSON.stringify(offers);
 };
 
+// Creates jobs objects pased a json string with the arc jovs dev info
+// Returns a list of dectionaries { id: jobObject }
+async function createJobsFromJson(json) {
+  const arcJobs = json.hits
+  const jolbyJobs = []
+  for (offer of arcJobs) {
+    const title = offer.title;
+    if (filterOffer(title)) {
+      const company = offer.company_name;
+      const id = offer.objectID;
+      const time = timeCalculator(offer.posted_timestamp);
+      let image = offer.company_logo_url;
+      image = (image === "") ? "https://thirsty-bhaskara-9f8dd9.netlify.app/static/media/logo.2be84f51.png" : image; // si true ejecuta codigo a la izq, false despues de los puntos
+      const applyLink = offer.url;
+      const description = offer.description;
+      const tags = getTagsFrom(description);
+      const job = new Job(title, id, company, time, image, applyLink, tags);
+      const dic = {};
+      dic[id] = JSON.stringify(job);
+      jolbyJobs.push(dic);
+    } else {
+      continue;
+    }
+  }
+  return jolbyJobs;
+}

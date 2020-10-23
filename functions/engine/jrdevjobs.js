@@ -2,19 +2,21 @@
 const fetch = require('node-fetch');
 const {getTagsFrom} = require("./tags_getter.js");
 const {filterOffer} = require("./jobs_filter.js");
+const { Job } = require("./constructor");
 
-class Job {
-  constructor(title, id, company, time, image, applyLink, tags = []) {
-    this.title = title;
-    this.id = id;
-    this.company = company;
-    this.time = time;
-    this.image = image;
-    this.applyLink = applyLink;
-    this.tags = tags;
-  }
+// Api consummer of jrdevjobs joab board
+exports.jrdev = async function () {
+  let response = await fetch('https://www.jrdevjobs.com/api/jobs?page=4', {
+    method: 'GET',
+    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
+  });
+  const res = await response.json();
+  const offers = await createJobsFromJson(res);
+  return JSON.stringify(offers);
 };
 
+// Creates jobs objects pased a json string with the jrdevjobs info
+// Returns a list of dectionaries { id: jobObject }
 async function createJobsFromJson(json) {
   const jrdevJobs = json.results
   const jolbyJobs = []
@@ -38,13 +40,3 @@ async function createJobsFromJson(json) {
   }
   return jolbyJobs;
 }
- 
-exports.jrdev = async function () {
-  let response = await fetch('https://www.jrdevjobs.com/api/jobs?page=4', {
-    method: 'GET',
-    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
-  });
-  const res = await response.json();
-  const offers = await createJobsFromJson(res);
-  return JSON.stringify(offers);
-};

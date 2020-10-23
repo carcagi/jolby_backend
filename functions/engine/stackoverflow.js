@@ -7,31 +7,22 @@ const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const {getTagsFrom} = require("./tags_getter.js");
 const {filterOffer} = require("./jobs_filter.js");
+const { getDesc, Job } = require("./constructor");
 
-//Job objects constructor
-class Job {
-  constructor(title, id, company, time, image, applyLink, tags = []) {
-    this.title = title;
-    this.id = id;
-    this.company = company;
-    this.time = time;
-    this.image = image;
-    this.applyLink = applyLink;
-    this.tags = tags;
-  }
-};
-
-//getDesc get the description from an offer to extract the tags from it
-async function getDesc(url) {
-  const res = await fetch(url, {
+//Main function for stackoverflow
+exports.stackoverflow = async function () {
+  const response = await fetch('https://stackoverflow.com/jobs?l=remote&d=20&u=Km&r=true&c=cop&ms=Student&mxs=MidLevel', {
     headers: { 'User-Agent': 'Chrome/51.0.2704.103' }
   });
-  const html2 = await res.text();
-  const $$ = cheerio.load(html2);
-  return $$('section.mb32.fs-body2.fc-medium.pr48 div').text();
+  const html = await response.text();
+  const $ = cheerio.load(html);
+  const offers = await createJobsFrom($);
+  return JSON.stringify(offers);
 };
 
-//Return an array of dictionaries {id: job object}
+// Stackoverflow's Scrapper
+// Creates job objects pased a cheerio instance
+// Returns a list of dectionaries { id: jobObject }
 async function createJobsFrom($) {
   return Promise.all(
     $('.-job').map(async function (elem) {
@@ -44,7 +35,8 @@ async function createJobsFrom($) {
         image = (image === "") ? "https://thirsty-bhaskara-9f8dd9.netlify.app/static/media/logo.2be84f51.png" : image; // si true ejecuta codigo a la izq, false despues de los puntos
         const stackLink = $(this).find('h2 a').attr('href');
         const applyLink = 'https://www.stackoverflow.com' + stackLink;
-        const description = stackLink ? await getDesc(applyLink) : ''; // si true ejecuta codigo a la izq, false despues de los puntos
+        const descQuery = 'section.mb32.fs-body2.fc-medium.pr48 div';
+        const description = stackLink ? await getDesc(applyLink, descQuery) : ''; // si true ejecuta codigo a la izq, false despues de los puntos
         const tags = getTagsFrom(description);
         const job = new Job(title, id, company, time, image, applyLink, tags);
         const dic = {};
@@ -56,14 +48,3 @@ async function createJobsFrom($) {
     }).toArray()
   );
 }
-
-//Main function - Scrapper
-exports.stackoverflow = async function () {
-  const response = await fetch('https://stackoverflow.com/jobs?l=remote&d=20&u=Km&r=true&c=cop&ms=Student&mxs=MidLevel', {
-    headers: { 'User-Agent': 'Chrome/51.0.2704.103' }
-  });
-  const html = await response.text();
-  const $ = cheerio.load(html);
-  const offers = await createJobsFrom($);
-  return JSON.stringify(offers);
-};
