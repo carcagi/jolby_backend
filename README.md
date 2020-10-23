@@ -1,7 +1,6 @@
-# jolby_backend
+# Jolby App
 
-## Jolby Rocks 
-## Jolby App
+## Backend Repository
 ![Jolby Logo](https://thirsty-bhaskara-9f8dd9.netlify.app/static/media/logo.2be84f51.png)
 
 ## Description
