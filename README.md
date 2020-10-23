@@ -9,7 +9,7 @@ Our team, with the support of Coderise, and Holberton Colombia, will attend this
 It is important to mention that we define the scope of our project to be exclusive to filter junior development jobs in a more efficient way for ourselves and our peers, but we are not making a platform for recruiters, which means that we are not pretending to have contracting or contact processes through the platform, it is intended that each user does it on their own.
 This project will help a lot of peers locally, but also could be implemented globally since the fact that we are bringing offers from anywhere, not just Colombia, or the US.
 ## Code Samples
-You can see the app here: [Jolby](https://thirsty-bhaskara-9f8dd9.netlify.app/)
+You can see the app here: [Jolby](https://jolby-front.herokuapp.com/)
 and the frontend repo here: [frontend](https://github.com/CrisRuedaP/Jolby)
 ## Installation
 You only need to download the repositories and install all the firebase dependencies and node modules inside the functions folder!
