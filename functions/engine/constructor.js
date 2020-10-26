@@ -5,7 +5,7 @@ const fetch = require('node-fetch');
 
 
 // Class constructor for Jolby's objects
-exports.Job = class Job { constructor(title, id, company, time, image, applyLink, tags = []) {
+exports.Job = class Job { constructor(title, id, company, time, image, applyLink, tags = [], reported=false) {
   this.title = title;
   this.id = id;
   this.company = company;
@@ -13,6 +13,7 @@ exports.Job = class Job { constructor(title, id, company, time, image, applyLink
   this.image = image;
   this.applyLink = applyLink;
   this.tags = tags;
+  this.reported = reported;
   }
 };
 
