@@ -31,5 +31,6 @@ app.get("/api/v1/refresh", (req, res) => {
 // Routes
 app.use(require("./routes/jobs_routes"));
 app.use(require("./routes/users_routes"));
+app.use(require("./routes/companies_routes.js"));
 
 exports.app = functions.https.onRequest(app);
