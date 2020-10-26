@@ -55,7 +55,7 @@ try {
 })();
 });
 
-// Create a User
+// Create an user
 router.post('/api/v1/users', (req, res) => {
 (async () => {
 try {
@@ -70,7 +70,7 @@ try {
 });
 
 
-// update user
+// Update an user
 router.put('/api/v1/users/:item_id', (req, res) => {
 (async () => {
 try {
