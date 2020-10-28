@@ -12,8 +12,11 @@ This project will help a lot of peers locally, but also could be implemented glo
 You can see the app here: [Jolby](https://jolby-front.herokuapp.com/)
 and the frontend repo here: [frontend](https://github.com/CrisRuedaP/Jolby)
 ## Installation
-You only need to download the repositories and install all the firebase dependencies and node modules inside the functions folder!
-```* Example: $ npm init express --save```
+You only need to download the repository and install all the firebase dependencies and node modules inside the functions folder!
+```
+$ npm install
+$ npm run serve
+```
 ## Authors 
 * Marisol Ramirez
 * Cristina Rueda
