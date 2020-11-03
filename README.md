@@ -1,7 +1,8 @@
 # jolby-backend
 
-![Jolby Logo](https://thirsty-bhaskara-9f8dd9.netlify.app/static/media/logo.2be84f51.png)
-
+<p align="center">
+<img src="https://i.ibb.co/PwVsr33/jolby.png"/>
+</p>
 
 ## Table of Contents
 
@@ -48,6 +49,7 @@ Jolby is an alternative for us and for our peers around the world to look for jo
 ## Installation
 
 This app is disabled to be used.
+You can see the app here: [Jolby](http://www.jolby.rocks/)
 
 ---
 
@@ -55,9 +57,9 @@ This app is disabled to be used.
 
 | Repo | Description |
 | --- | --- |
-| [Landing page](https://github.com/CrisRuedaP/landing-page) | Page where you can find the app description.|
-| [Backend](https://github.com/dalejohgi/jolby_backend) | Backend API with Node.js and Express.js with database manager firebase files and scrappers. Branch: db-feature|
-| [Frontend](https://github.com/CrisRuedaP/Jolby) | Frontend construction with React.js and firebase files. Branch: db-feature|
+| [Landing-page](https://github.com/CrisRuedaP/landing-page) | Page where you can find the app description.|
+| [Backend](https://github.com/dalejohgi/jolby_backend) | Backend API with Node.js and Express.js with database manager firebase files and scrappers.|
+| [Frontend](https://github.com/CrisRuedaP/Jolby) | Frontend construction with React.js and firebase files|
 
 ---
 
@@ -70,9 +72,11 @@ This app is disabled to be used.
 
 ## Built With
 
-* NodeJS
-* ExpressJS
-* Firebase
+![](https://img.shields.io/badge/-React-blue) 
+![](https://img.shields.io/badge/-React--Bootstrap-blueviolet)
+![](https://img.shields.io/badge/-Node%20JS-green) 
+![](https://img.shields.io/badge/-Express%20JS-red)
+![](https://img.shields.io/badge/-Firebase-yellow)
 
 ---
 
