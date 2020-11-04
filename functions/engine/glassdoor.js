@@ -1,4 +1,8 @@
 #!/usr/bin/node
+/**
+ * Glassdoor scrappers file
+ */
+
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 const { getTagsFrom } = require("./tags_getter.js");

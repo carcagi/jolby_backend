@@ -1,5 +1,8 @@
 #!/usr/bin/node
-// Class constructor for job offers
+/**
+ * Class contructor file
+ */
+
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 
@@ -9,7 +12,7 @@ exports.Job = class Job { constructor(title, id, company, time, image, applyLink
   this.title = title;
   this.id = id;
   this.company = company;
-  this.time = time;
+  this.time = "";
   this.image = image;
   this.applyLink = applyLink;
   this.tags = tags;

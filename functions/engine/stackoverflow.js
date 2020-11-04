@@ -1,15 +1,16 @@
 #!/usr/bin/node
 /**
- * Stackoverflow scrapper 
+ * Stackoverflow scrappers file 
  * 
  */
+
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
-const {getTagsFrom} = require("./tags_getter.js");
 const {filterOffer} = require("./jobs_filter.js");
 const { getDesc, Job } = require("./constructor");
+const {getTagsFrom} = require("./tags_getter.js");
 
-//Main function for stackoverflow
+//Main scrapper function for stackoverflow
 exports.stackoverflow = async function () {
   const response = await fetch('https://stackoverflow.com/jobs?l=remote&d=20&u=Km&r=true&c=cop&ms=Student&mxs=MidLevel', {
     headers: { 'User-Agent': 'Chrome/51.0.2704.103' }
@@ -20,7 +21,6 @@ exports.stackoverflow = async function () {
   return JSON.stringify(offers);
 };
 
-// Stackoverflow's Scrapper
 // Creates job objects pased a cheerio instance
 // Returns a list of dectionaries { id: jobObject }
 async function createJobsFrom($) {

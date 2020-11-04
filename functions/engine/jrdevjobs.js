@@ -1,4 +1,8 @@
 #!/usr/bin/node
+/**
+ * Jrdevjobs scrappers file
+ */
+
 const fetch = require('node-fetch');
 const {getTagsFrom} = require("./tags_getter.js");
 const {filterOffer} = require("./jobs_filter.js");
@@ -6,7 +10,7 @@ const { Job } = require("./constructor");
 
 // Api consummer of jrdevjobs joab board
 exports.jrdev = async function () {
-  let response = await fetch('https://www.jrdevjobs.com/api/jobs?page=4', {
+  let response = await fetch('https://www.jrdevjobs.com/api/jobs?page=1', {
     method: 'GET',
     headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
   });

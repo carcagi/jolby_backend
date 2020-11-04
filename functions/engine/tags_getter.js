@@ -1,5 +1,7 @@
 #!/usr/bin/node
-
+/** 
+ * Tags getter system
+ */
 
 const techs = [
   {name: "Python", expresion: /Python/ig},

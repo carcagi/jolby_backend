@@ -1,5 +1,9 @@
-// Script to refresh the data in Jolby App (Endpoint equivalent)
-const functions = require("firebase-functions");
+#!/usr/bin/node
+
+/** 
+ * Script to refresh the data in Jolby App manually (Endpoint equivalent)
+ */ 
+
 const admin = require("firebase-admin");
 const {loadData} = require("./webScanner");
 const {scan} = require("./webScanner");

@@ -1,7 +1,9 @@
 #!/usr/bin/node
+/**
+ * Calculates time in days since a job offer was posted in their original
+ * job board pased a unix timestamp.
+ */ 
 
-// Calculates time in days since a job offer was posted in their original
-// job board pased a unix timestamp.
 exports.timeCalculator = function (timestamp) {
   dateNow = Date.now();
   var delta = Math.abs(dateNow - timestamp) / 1000;

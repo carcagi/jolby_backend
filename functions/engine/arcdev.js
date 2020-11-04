@@ -1,4 +1,9 @@
 #!/usr/bin/node
+
+/**
+ * Arcdev scrappers file
+ */
+
 const fetch = require('node-fetch');
 const {getTagsFrom} = require("./tags_getter.js");
 const {filterOffer} = require("./jobs_filter.js");
@@ -19,12 +24,13 @@ exports.arc = async function () {
                'Origin': 'https://arc.dev',
                'Referer': 'https://arc.dev/',
                'Sec-Fetch-Dest': 'empty',
-               'ec-Fetch-Mode': 'cors',
+               'Sec-Fetch-Mode': 'cors',
                'Sec-Fetch-Site': 'cross-site',
                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'
                },
-    body: JSON.stringify({"params":"filters=(experience_levels%3Ajunior%20OR%20experience_levels%3Agraduate)%20AND%20(NOT%20experience_levels%3Asenior)%20AND%20(is_closed%3D0)&offset=90&length=10"}),
+    body: JSON.stringify({"params":"filters=(experience_levels%3Ajunior%20OR%20experience_levels%3Agraduate)%20AND%20(NOT%20experience_levels%3Asenior)%20AND%20(is_closed%3D0)&offset=60&length=10"}),
   });
+  console.log(response.status);
   const res = await response.json();
   const offers = await createJobsFromJson(res);
   return JSON.stringify(offers);

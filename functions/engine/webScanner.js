@@ -1,4 +1,8 @@
 #!/usr/bin/node
+/**
+ * Web scanner file
+ */
+
 const { arc } = require("./arcdev.js");
 const {glassdoor} = require("./glassdoor.js");
 const { jrdev } = require("./jrdevjobs.js");

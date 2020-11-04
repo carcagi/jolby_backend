@@ -1,3 +1,8 @@
+/**
+ * Restfull API for Jolby
+ * 
+ */
+
 const admin = require("firebase-admin");
 const cors = require("cors");
 const express = require("express");
@@ -5,6 +10,7 @@ const functions = require("firebase-functions");
 const {loadData} = require("./engine/webScanner");
 const {scan} = require("./engine/webScanner");
 const serviceAccount = require("./permissions.json");
+
 const app = express();
 
 admin.initializeApp({

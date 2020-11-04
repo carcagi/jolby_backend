@@ -1,12 +1,14 @@
 #!/usr/bin/node
-
+/**
+ * API's routes for companies features
+ */
 const { Router } = require("express");
 const router = Router();
 
 const admin = require("firebase-admin");
 const db = admin.firestore();
 
-// Get all jobs
+// Get all companies registered
 router.get('/api/v1/companies', (req, res) => {
   (async () => {
       try {
@@ -28,7 +30,7 @@ router.get('/api/v1/companies', (req, res) => {
       })();
   });
 
-// Get a job
+// Get an specific company
 router.get('/api/v1/companies/:item_id', (req, res) => {
   (async () => {
       try {
@@ -43,7 +45,7 @@ router.get('/api/v1/companies/:item_id', (req, res) => {
       })();
   });
 
-// Delete job
+// Delete a company from the database
 router.delete('/api/v1/companies/:item_id', (req, res) => {
   (async () => {
     try {
@@ -57,7 +59,7 @@ router.delete('/api/v1/companies/:item_id', (req, res) => {
     })();
   });
 
-// Create a Job
+// Create a company profile
 router.post('/api/v1/companies', (req, res) => {
     (async () => {
         try {
@@ -72,7 +74,7 @@ router.post('/api/v1/companies', (req, res) => {
 });
 
 
-// update job
+// Update the company information
 router.put('/api/v1/companies/:item_id', (req, res) => {
 (async () => {
   try {

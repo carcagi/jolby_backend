@@ -1,5 +1,7 @@
 #!/usr/bin/node
-
+/**
+ * API's routes for jobs features
+ */
 const { Router } = require("express");
 const router = Router();
 
@@ -73,7 +75,7 @@ router.post('/api/v1/jobs', (req, res) => {
 });
 
 
-// update job
+// Update job
 router.put('/api/v1/jobs/:item_id', (req, res) => {
 (async () => {
   try {

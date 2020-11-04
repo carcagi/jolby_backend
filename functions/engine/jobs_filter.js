@@ -1,4 +1,8 @@
 #!/usr/bin/node
+/**
+ * Job offers filter system
+ */
+
 const discard_keys = [ 
   /Senior/img,
   /\nSenior/img,

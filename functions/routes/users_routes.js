@@ -1,3 +1,8 @@
+#!/usr/bin/node
+/**
+ * API's routes for users features
+ */
+
 const { Router } = require("express");
 const router = Router();
 
